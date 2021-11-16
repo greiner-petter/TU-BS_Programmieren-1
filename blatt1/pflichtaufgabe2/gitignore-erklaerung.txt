@@ -1,0 +1,2 @@
+In Zeile 109 schließt die .gitignore alle Datein, die mit ".class" enden aus.
+Der Stern steht in diesem Fall für eine "Wildcard", was heißt, dass es egal ist was vor dem ".class" steht.
