@@ -9,19 +9,19 @@ Und vergessen Sie nicht Ihre Lösung mit `git push` auch an unseren Server zu se
 Bitte füllen Sie und Ihr:e Gruppenpartner:in die folgenden Informationen sorgfältig aus.
 Achten Sie darauf hier die Matrikelnummer und nicht die y-Nummer einzutragen.
 
-- Gruppe: 1A
+- Gruppe: 6B
 
 Studierender A
-- Vorname: Lisa 
-- Nachname: Müller
-- Matrikelnummer: 1337
+- Vorname: Oliver
+- Nachname: Greiner-Petter
+- Matrikelnummer: 5232543
 - Studiengang: Informatik
 - Geplanter Abschluss: Bachelor
 
 Studierende B
-- Vorname: Peter
-- Nachname: Müller
-- Matrikelnummer: 1234
-- Studiengang: Physik
+- Vorname: Yan-Lennart
+- Nachname: Schwanbeck
+- Matrikelnummer: 5229396
+- Studiengang: Informatik
 - Geplanter Abschluss: Bachelor
 
