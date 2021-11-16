@@ -19,8 +19,8 @@ Studierender A
 - Geplanter Abschluss: Bachelor
 
 Studierende B
-- Vorname: Peter
-- Nachname: Müller
-- Matrikelnummer: 1234
-- Studiengang: Physik
+- Vorname: Yan-Lennart
+- Nachname: Schwanbeck
+- Matrikelnummer: 5229396
+- Studiengang: Informatik
 - Geplanter Abschluss: Bachelor
