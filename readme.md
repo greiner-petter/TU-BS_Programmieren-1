@@ -13,7 +13,7 @@ Achten Sie darauf hier die Matrikelnummer und nicht die y-Nummer einzutragen.
 
 Studierender A
 - Vorname: Oliver
-- Nachname: Griener-Petter
+- Nachname: Greiner-Petter
 - Matrikelnummer: 5232543
 - Studiengang: Informatik
 - Geplanter Abschluss: Bachelor
