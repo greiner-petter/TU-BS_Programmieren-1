@@ -1,10 +1,14 @@
-<<<<<<< HEAD
 import java.util.Scanner;
 public class Zahlenraten{
   public static void main(String[] args){
 
     if(args.length == 0 ){
       selberRaten();
+    }
+
+    if (args.length >= 1) {
+      int numToGuess = Integer.parseInt (args[0]);
+      computerRaten(numToGuess);
     }
 
   }
@@ -32,14 +36,6 @@ public class Zahlenraten{
     System.out.println("Richtige Nummer!");
   }
 
-=======
-public class Zahlenraten {
-  public static void main(String[] args) {
-    if (args.length >= 1) {
-      int numToGuess = Integer.parseInt (args[0]);
-      computerRaten(numToGuess);
-    }
-  }
   public static void computerRaten(int a) {
     if (a >= 101) {
       System.out.println("Diese Zahl ist leider zu groß.");
@@ -55,8 +51,7 @@ public class Zahlenraten {
         randomNumber = (int)zahl;
         counter++;
       }
-      System.out.println(counter);
+      System.out.println("Der Computer hat " + counter + " Versuche gebraucht um die Zahl zu erraten.");
     }
   }
->>>>>>> 759c4f7ca2046c679145a3a2f0a5f789c70d628f
 }
