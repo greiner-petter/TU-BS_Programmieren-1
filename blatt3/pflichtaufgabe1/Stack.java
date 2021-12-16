@@ -1,15 +1,15 @@
 import java.util.Random;
 public class Stack {
-    private boolean isDiscardDeck;
-    private Card[] playDeck = new Card[32];
-    private Card[] discardDeck = new Card[32];
-    private int counter = 0;
-    private int discardCounter = 0;
-    private int whereToPlace = 0;
-    private Suits suit;
-    private Ranks rank;
-    private Suits[] suits = Suits.values();
-    private Ranks[] ranks = Ranks.values();
+    boolean isDiscardDeck;
+    Card[] playDeck = new Card[32];
+    Card[] discardDeck = new Card[32];
+    int counter = 0;
+    int discardCounter = 0;
+    int whereToPlace = 0;
+    Suits suit;
+    Ranks rank;
+    Suits[] suits = Suits.values();
+    Ranks[] ranks = Ranks.values();
 
     public Stack(){
         for (int i = 0; i < 4; i++) {
@@ -43,14 +43,14 @@ public class Stack {
         //System.out.println("lastCard: " + lastCard.toString());
         //System.out.println("cardToBePlayed: " + cardToBePlayed.toString());
         if(isFirstCard){
-            discardDeck[0] = cardToBePlayed;
+            discardDeck[whereToPlace] = cardToBePlayed;
+            whereToPlace++;
             legitimateTurn = true;
         }else{
             if(lastCard.getRanks() == cardToBePlayed.getRanks() || lastCard.getSuits() == cardToBePlayed.getSuits()){
                 discardDeck[whereToPlace] = cardToBePlayed;
+                whereToPlace++;
                 legitimateTurn = true;
-            }else{
-                System.out.println("You cannot play this card");
             }
         }
         return legitimateTurn;
@@ -65,20 +65,21 @@ public class Stack {
         return deckIsEmpty;
     }
     public Card show(){
-        Card cardToShow = new Card(suit = Suits.EMPTY, rank = Ranks.EMPTY);
-        for(int  i = 31; i >= 0; i--){
-            if(discardDeck[i].getRanks() != Ranks.EMPTY){
-                cardToShow = discardDeck[i];
-                whereToPlace = i + 1;
-                i = 0;
-            }
-        }
-        return cardToShow;
+        return discardDeck[whereToPlace - 1];
     }
-    public String toString(){
+    public String pdtoString(){
         String deckToString = "";
         int counter2 = 0;
         for (Card card : playDeck){
+            deckToString += "\n" + counter2 + " " + card.toString();
+            counter2++;
+        }
+    return deckToString;
+    }
+    public String ddtoString(){
+        String deckToString = "";
+        int counter2 = 0;
+        for (Card card : discardDeck){
             deckToString += "\n" + counter2 + " " + card.toString();
             counter2++;
         }
