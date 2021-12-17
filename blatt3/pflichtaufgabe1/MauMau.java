@@ -1,19 +1,18 @@
 import java.util.Scanner;
-public class MauMau{
-    public static void main(String[] args) {
 
+public class MauMau {
+    public static void main(String[] args) {
+        //variables
         boolean isDiscardDeck = true;
-        boolean isFirstCard = true;
         Stack playDeck = new Stack();
         Stack discardDeck = new Stack(isDiscardDeck);
         boolean winner = false;
         boolean validInput;
         Card cardDrawn;
         Card cardToBePlayed;
-        Suits suit;
-        Ranks rank;
+        Card emptyCard = new Card(Suits.EMPTY, Ranks.EMPTY);
 
-        //Player erstellt
+        //create player and computer
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your name:");
         String playerName = sc.nextLine();
@@ -21,17 +20,15 @@ public class MauMau{
         Player player1 = new Player(playerName, playDeck);
         Player playerC = new Player(playDeck);
 
-        //First Card
+        //play the first card
         Card firstCard = playDeck.draw();
-        Card lastCard = new Card(suit = Suits.EMPTY, rank = Ranks.EMPTY);
-        discardDeck.playCard(firstCard, lastCard,  isFirstCard);
-        isFirstCard = false;
+        Card lastCard = emptyCard;
+        discardDeck.playCard(firstCard, lastCard,  true);
 
-        //Beginn des Spiels
-        while(winner == false) {
+        //start of the game loop
+        while (winner == false) {
             lastCard = discardDeck.show();
             validInput = false;
-            System.out.println(playDeck.pdtoString());
             while (validInput == false) {
                 System.out.println("What would you like to do?");
                 System.out.println("(put) a card down, (take) a card, (show) your hand or (look) at the current card");
@@ -49,7 +46,7 @@ public class MauMau{
                         break;
                     case "show":
                         System.out.print("You have these cards:");
-                        System.out.println(player1.toString() + "\n");
+                        System.out.println(player1.showHand() + "\n");
                         break;
                     case "look":
                         System.out.println("The current card on the deck is the " + lastCard + "\n");
@@ -64,36 +61,45 @@ public class MauMau{
                 }
             }
             if (playDeck.checkIfEmpty()) {
-                System.out.println(playDeck.pdtoString());
-                System.out.println(discardDeck.ddtoString());
-                Card currentPlayingCard = discardDeck.show();
-                for(int i = 0; i < 32; i++){
-                    playDeck.playDeck[i] = discardDeck.discardDeck[i];
+                firstCard = discardDeck.show();
+                for (int i = 0; i < 32; i++) {
+                    playDeck.getPlayDeck()[i] = discardDeck.getDiscardDeck()[i];
+                    if (playDeck.getPlayDeck()[i] == firstCard) {
+                        playDeck.getPlayDeck()[i] = emptyCard;
+                    }
                 }
-                for(int i = 0; i < 32; i++){
-                    discardDeck.discardDeck[i].setSuits(Suits.EMPTY);
-                    discardDeck.discardDeck[i].setRanks(Ranks.EMPTY);
-                }
-                System.out.println(playDeck.pdtoString());
-                System.out.println(discardDeck.ddtoString());
-                //playDeck.playDeck[playDeck.whereToPlace - 1].setRanks(Ranks.EMPTY);
-                //playDeck.playDeck[playDeck.whereToPlace - 1].setSuits(Suits.EMPTY);
-                //System.out.println(playDeck.pdtoString());
-                //System.out.println(discardDeck.ddtoString());
-
+                discardDeck = new Stack(isDiscardDeck);
+                discardDeck.playCard(firstCard, lastCard, true);
             }
-            lastCard = discardDeck.show();
-            playerC.playCardComputer(lastCard, discardDeck, playDeck);
-            System.out.println("");
-            if (playDeck.checkIfEmpty()) {
-
-            }
-            if (player1.playerHand.size() == 0) {
+            if (player1.getPlayerHand().size() == 0) {
                 winner = true;
                 System.out.println("Congratulations " + playerName + ", you won!");
-            } else if (playerC.computerHand.size() == 0) {
+            } else if (playerC.getComputerHand().size() == 0) {
                 winner = true;
                 System.out.println("Sorry " + playerName + ", you lost :(");
+            }
+            if (winner == false) {
+                lastCard = discardDeck.show();
+                playerC.playCardComputer(lastCard, discardDeck, playDeck);
+                System.out.println("");
+                if (playDeck.checkIfEmpty()) {
+                    firstCard = discardDeck.show();
+                    for (int i = 0; i < 32; i++) {
+                        playDeck.getPlayDeck()[i] = discardDeck.getDiscardDeck()[i];
+                        if (playDeck.getPlayDeck()[i] == firstCard) {
+                            playDeck.getPlayDeck()[i] = emptyCard;
+                        }
+                    }
+                    discardDeck = new Stack(isDiscardDeck);
+                    discardDeck.playCard(firstCard, lastCard, true);
+                }
+                if (player1.getPlayerHand().size() == 0) {
+                    winner = true;
+                    System.out.println("Congratulations " + playerName + ", you won!");
+                } else if (playerC.getComputerHand().size() == 0) {
+                    winner = true;
+                    System.out.println("Sorry " + playerName + ", you lost :(");
+                }
             }
         }
     }

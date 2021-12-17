@@ -1,23 +1,33 @@
 public class Card {
-    Suits suit;
-    Ranks rank;
-    public Card(Suits suit, Ranks rank){
+    /** suit enum */
+    private Suits suit;
+
+    /** rank enum */
+    private Ranks rank;
+
+    /**
+    constructor for the card
+    @param suit
+    @param rank
+    */
+    public Card(Suits suit, Ranks rank) {
         this.suit = suit;
         this.rank = rank;
     }
-    public Ranks getRanks(){
-        return rank;
-    }
-    public Suits getSuits(){
+
+    public Suits getSuits() {
         return suit;
     }
-    public void setRanks(Ranks rank){
-        this.rank = rank;
+
+    public Ranks getRanks() {
+        return rank;
     }
-    public void setSuits(Suits suit){
-        this.suit = suit;
-    }
-    public String toString(){
+
+    /**
+    converts the card to a string for better output to the console
+    @return rank of suit
+    */
+    public String toString() {
         return rank.toString() + " of " + suit.toString();
     }
 }
