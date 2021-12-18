@@ -120,14 +120,15 @@ public class Player {
         for (int i = 0; i < computerHand.size(); i++) {
             legitimateTurn = discardDeck.playCard(computerHand.get(i), lastCard, isFirstCard);
             if (legitimateTurn == true) {
-                System.out.println("The computer played the " + computerHand.get(i));
+                System.out.print("The computer played the " + computerHand.get(i));
                 computerHand.remove(i);
+                System.out.println(" and has " + computerHand.size() + " card(s) left");
                 i = computerHand.size();
             }
         }
         if (legitimateTurn == false) {
             computerHand.add(playDeck.draw());
-            System.out.println("The computer drew a card");
+            System.out.println("The computer drew a card and has " + computerHand.size() + " card(s) left");
         }
     }
 
