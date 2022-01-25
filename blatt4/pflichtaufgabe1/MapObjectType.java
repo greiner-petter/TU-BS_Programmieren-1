@@ -4,5 +4,9 @@ public enum MapObjectType {
     /** comment */
     HACKED,
     /** comment */
-    NORMAL
+    NORMAL,
+    /** comment */
+    HMOVED,
+    /** comment */
+    NMOVED
 }

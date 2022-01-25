@@ -48,47 +48,82 @@ public class GameMaster {
                 for (int y = 0; y < mapSize; y++) {
                     if (map.checkCoordinates(x, y) == MapObjectType.HACKED
                         || map.checkCoordinates(x, y) == MapObjectType.NORMAL) {
-                        int randomNumber = (int) (Math.random() * 3 + 1);
+                        int randomNumber = (int) (Math.random() * 4) + 1;
                         switch (randomNumber) {
                             case 1:
                                 try {
                                     if (map.checkCoordinates(x - 1, y) == MapObjectType.EMPTY) {
-                                        map.getMap()[x - 1][y] = map.getMap()[x][y];
+                                        if (map.getMap()[x][y] == MapObjectType.HACKED) {
+                                            map.getMap()[x - 1][y] = MapObjectType.HMOVED;
+                                        } else if (map.getMap()[x][y] == MapObjectType.NORMAL) {
+                                            map.getMap()[x - 1][y] = MapObjectType.NMOVED;
+                                        }
                                         map.getMap()[x][y] = MapObjectType.EMPTY;
                                         map.getLocations()[x - 1][y] = map.getLocations()[x][y];
                                         map.getLocations()[x][y] = null;
+                                        break;
                                     }
-                                } catch (ArrayIndexOutOfBoundsException e) { }
-                            //fix double movement1!!1
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    break;
+                                }
                             case 2:
                                 try {
                                     if (map.checkCoordinates(x, y + 1) == MapObjectType.EMPTY) {
-                                        map.getMap()[x][y + 1] = map.getMap()[x][y];
+                                        if (map.getMap()[x][y] == MapObjectType.HACKED) {
+                                            map.getMap()[x][y + 1] = MapObjectType.HMOVED;
+                                        } else if (map.getMap()[x][y] == MapObjectType.NORMAL) {
+                                            map.getMap()[x][y + 1] = MapObjectType.NMOVED;
+                                        }
                                         map.getMap()[x][y] = MapObjectType.EMPTY;
                                         map.getLocations()[x][y + 1] = map.getLocations()[x][y];
                                         map.getLocations()[x][y] = null;
+                                        break;
                                     }
-                                } catch (ArrayIndexOutOfBoundsException e) { }
-                            //fix double movement!!! entwered enums oder 3. array
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    break;
+                                }
                             case 3:
                                 try {
                                     if (map.checkCoordinates(x + 1, y) == MapObjectType.EMPTY) {
-                                        map.getMap()[x + 1][y] = map.getMap()[x][y];
+                                        if (map.getMap()[x][y] == MapObjectType.HACKED) {
+                                            map.getMap()[x + 1][y] = MapObjectType.HMOVED;
+                                        } else if (map.getMap()[x][y] == MapObjectType.NORMAL) {
+                                            map.getMap()[x + 1][y] = MapObjectType.NMOVED;
+                                        }
                                         map.getMap()[x][y] = MapObjectType.EMPTY;
                                         map.getLocations()[x + 1][y] = map.getLocations()[x][y];
                                         map.getLocations()[x][y] = null;
+                                        break;
                                     }
-                                } catch (ArrayIndexOutOfBoundsException e) { }
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    break;
+                                }
                             case 4:
                                 try {
                                     if (map.checkCoordinates(x, y - 1) == MapObjectType.EMPTY) {
-                                        map.getMap()[x][y - 1] = map.getMap()[x][y];
+                                        if (map.getMap()[x][y] == MapObjectType.HACKED) {
+                                            map.getMap()[x][y - 1] = MapObjectType.HMOVED;
+                                        } else if (map.getMap()[x][y] == MapObjectType.NORMAL) {
+                                            map.getMap()[x][y - 1] = MapObjectType.NMOVED;
+                                        }
                                         map.getMap()[x][y] = MapObjectType.EMPTY;
                                         map.getLocations()[x][y - 1] = map.getLocations()[x][y];
                                         map.getLocations()[x][y] = null;
+                                        break;
                                     }
-                                } catch (ArrayIndexOutOfBoundsException e) { }
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    break;
+                                }
                         }
+                    }
+                }
+            }
+            for (int x = 0; x < mapSize; x++) {
+                for (int y = 0; y < mapSize; y++) {
+                    if (map.getMap()[x][y] == MapObjectType.HMOVED) {
+                        map.getMap()[x][y] = MapObjectType.HACKED;
+                    } else if (map.getMap()[x][y] == MapObjectType.NMOVED) {
+                        map.getMap()[x][y] = MapObjectType.NORMAL;
                     }
                 }
             }

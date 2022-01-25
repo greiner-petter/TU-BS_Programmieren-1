@@ -14,4 +14,11 @@ public class NormalRobot extends Robot implements MapObject {
     public String print() {
         return "N" + getID();
     }
+
+    /**
+    empty method because robot passes through this method to all children
+    @param robotBeingHacked placeholder
+    @return boolean
+    */
+    public Boolean tryHack(Robot robotBeingHacked) { }
 }
