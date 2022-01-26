@@ -20,5 +20,7 @@ public class NormalRobot extends Robot implements MapObject {
     @param robotBeingHacked placeholder
     @return boolean
     */
-    public Boolean tryHack(Robot robotBeingHacked) { }
+    public Boolean tryHack(Robot robotBeingHacked) {
+        return false;
+    }
 }

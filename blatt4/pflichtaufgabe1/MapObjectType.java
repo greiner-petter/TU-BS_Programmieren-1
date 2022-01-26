@@ -1,12 +1,12 @@
 public enum MapObjectType {
-    /** comment */
+    /** empty type */
     EMPTY,
-    /** comment */
+    /** hacked type */
     HACKED,
-    /** comment */
+    /** normal type */
     NORMAL,
-    /** comment */
+    /** moved hakced type */
     HMOVED,
-    /** comment */
+    /** moved normal type */
     NMOVED
 }

@@ -24,12 +24,15 @@ public class GameMaster {
         boolean allHacked = false;
         int day = 0;
         while (!allHacked) {
+            //searches all hacked robots
             for (int x = 0; x < mapSize; x++) {
                 for (int y = 0; y < mapSize; y++) {
                     if (map.checkCoordinates(x, y) == MapObjectType.HACKED) {
+                        //if a hacked robot is found it searches for normal robots around it
                         for (int x2 = x - 3; x2 <= x + 3; x2++) {
                             for (int y2 = y - 3; y2 <= y + 3; y2++) {
                                 try {
+                                    //if it finds a normal robot it trys to hack it and if successful converts it
                                     if (map.checkCoordinates(x2, y2) == MapObjectType.NORMAL) {
                                         if (map.getCoordinates(x, y).tryHack(map.getCoordinates(x2, y2))) {
                                             map.getLocations()[x2][y2] =
@@ -44,6 +47,7 @@ public class GameMaster {
                     }
                 }
             }
+            //moves all robots one space in a random direction
             for (int x = 0; x < mapSize; x++) {
                 for (int y = 0; y < mapSize; y++) {
                     if (map.checkCoordinates(x, y) == MapObjectType.HACKED
@@ -52,6 +56,7 @@ public class GameMaster {
                         switch (randomNumber) {
                             case 1:
                                 try {
+                                    //sees if the space is free, if so it moves it there and gives it the moved type
                                     if (map.checkCoordinates(x - 1, y) == MapObjectType.EMPTY) {
                                         if (map.getMap()[x][y] == MapObjectType.HACKED) {
                                             map.getMap()[x - 1][y] = MapObjectType.HMOVED;
@@ -68,6 +73,7 @@ public class GameMaster {
                                 }
                             case 2:
                                 try {
+                                    //sees if the space is free, if so it moves it there and gives it the moved type
                                     if (map.checkCoordinates(x, y + 1) == MapObjectType.EMPTY) {
                                         if (map.getMap()[x][y] == MapObjectType.HACKED) {
                                             map.getMap()[x][y + 1] = MapObjectType.HMOVED;
@@ -84,6 +90,7 @@ public class GameMaster {
                                 }
                             case 3:
                                 try {
+                                    //sees if the space is free, if so it moves it there and gives it the moved type
                                     if (map.checkCoordinates(x + 1, y) == MapObjectType.EMPTY) {
                                         if (map.getMap()[x][y] == MapObjectType.HACKED) {
                                             map.getMap()[x + 1][y] = MapObjectType.HMOVED;
@@ -100,6 +107,7 @@ public class GameMaster {
                                 }
                             case 4:
                                 try {
+                                    //sees if the space is free, if so it moves it there and gives it the moved type
                                     if (map.checkCoordinates(x, y - 1) == MapObjectType.EMPTY) {
                                         if (map.getMap()[x][y] == MapObjectType.HACKED) {
                                             map.getMap()[x][y - 1] = MapObjectType.HMOVED;
@@ -118,6 +126,7 @@ public class GameMaster {
                     }
                 }
             }
+            //reverts all moved types to the regular ones
             for (int x = 0; x < mapSize; x++) {
                 for (int y = 0; y < mapSize; y++) {
                     if (map.getMap()[x][y] == MapObjectType.HMOVED) {
@@ -127,8 +136,10 @@ public class GameMaster {
                     }
                 }
             }
+            //prints the day and the map
             System.out.println("Day: " + day);
             map.toString();
+            //checks if all robots are hacked
             if (numberOfHackedRobots == totalRobots) {
                 allHacked = true;
             }
